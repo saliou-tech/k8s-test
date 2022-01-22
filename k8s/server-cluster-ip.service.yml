@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: server-cluster-ip-service
+spec:
+  type: ClusterIP
+  selector:
+    component: server
+  ports:
+    - port: 5000
+      targetPort: 5000
+
+---
+apiVersion: v1
+kind: Endpoints
+metadata:
+  name:  server-cluster-ip-service
+subsets:
+  - addresses:
+      - ip: 192.168.49.2
+    ports:
+      - name: client-cluster-ip-service
+        port: 5000
+        protocol: TCP

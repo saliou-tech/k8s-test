@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+#####    NOM DU DEPLOYMENT ############
+metadata:
+  name: client-deployment
+
+########  POD   ########
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      component: web
+  template:
+    metadata:
+      labels:
+        component: web
+        ######Container part########
+    spec:
+      containers:
+        - name: client
+          image: 1234567892018/multi-client
+          ports:
+            - containerPort: 4000
